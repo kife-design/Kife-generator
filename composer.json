@@ -1,0 +1,12 @@
+{
+    "name": "kife-design/repo-generator",
+    "description": "Generator that creates stub files for repositories and their implementations",
+    "authors": [
+        {
+            "name": "Kife-design",
+            "email": "vincent@kifed.be"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
