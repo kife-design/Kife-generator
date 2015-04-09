@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'model_path' => './app/Models',
     'contract_path' => './app/Repositories/',
-    'repository_path' > ''
+    'implementation_path' => './app/Repositories/Eloquent/'
 ];

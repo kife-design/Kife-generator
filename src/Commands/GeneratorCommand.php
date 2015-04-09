@@ -10,17 +10,3 @@ namespace Kifed\Generator\Commands;
 
 
 use Illuminate\Console\GeneratorCommand as Command;
-
-class GeneratorCommand extends Command
-{
-
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getStub()
-    {
-        // TODO: Implement getStub() method.
-    }
-}

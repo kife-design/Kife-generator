@@ -1,23 +1,31 @@
 <?php namespace Kifed\Generator\Commands;
 
 
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-class InterfaceGenerateCommand extends GeneratorCommand {
+class ContractGenerateCommand extends GeneratorCommand {
 
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'generate:interface';
+    protected $name = 'generate:contract';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new repository interface.';
+    protected $description = 'Create a new repository contract.';
+
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Contract';
 
     /**
      * Parse the name and format according to the root namespace.
@@ -37,7 +45,7 @@ class InterfaceGenerateCommand extends GeneratorCommand {
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/repository-interface.stub';
+        return __DIR__ . '/../stubs/repository-contract.stub';
     }
     /**
      * Get the destination class path.
@@ -47,7 +55,8 @@ class InterfaceGenerateCommand extends GeneratorCommand {
      */
     protected function getPath($name)
     {
-        return './database/seeds/' . str_replace('\\', '/', $name) . '.php';
+
+        return config('kifegen.contract_path') . str_replace('\\', '/', $name) . '.php';
     }
 
     /**
@@ -58,7 +67,7 @@ class InterfaceGenerateCommand extends GeneratorCommand {
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the interface'],
+            ['name', InputArgument::REQUIRED, 'The name of the contract'],
         ];
     }
 

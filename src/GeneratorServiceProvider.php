@@ -16,7 +16,6 @@ class GeneratorServiceProvider extends ServiceProvider {
         ]);
     }
 
-
     /**
      * Register the application services.
      *
@@ -25,7 +24,7 @@ class GeneratorServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->generateRepositoryCommand();
-        $this->generateInterfaceCommand();
+        $this->generateContractCommand();
         $this->generateResourceCommand();
 
         $this->mergeConfigFrom(__DIR__.'/config/kifegen.php', 'kifegen');
@@ -40,13 +39,13 @@ class GeneratorServiceProvider extends ServiceProvider {
         $this->commands('command.kifed.repository');
     }
 
-    private function generateInterfaceCommand()
+    private function generateContractCommand()
     {
-        $this->app->singleton('command.kifed.interface', function ($app) {
-            return $app['Kifed\Generator\Commands\InterfaceGenerateCommand'];
+        $this->app->singleton('command.kifed.contract', function ($app) {
+            return $app['Kifed\Generator\Commands\ContractGenerateCommand'];
         });
 
-        $this->commands('command.kifed.interface');
+        $this->commands('command.kifed.contract');
     }
 
 

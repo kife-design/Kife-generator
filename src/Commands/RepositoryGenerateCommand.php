@@ -1,9 +1,10 @@
 <?php namespace Kifed\Generator\Commands;
 
+use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
 
-use Illuminate\Console\Command;
-
-class RepositoryGenerateCommand extends Command {
+class RepositoryGenerateCommand extends GeneratorCommand
+{
 
     /**
      * The console command name.
@@ -19,25 +20,50 @@ class RepositoryGenerateCommand extends Command {
      */
     protected $description = 'Create a new repository.';
 
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Repository';
+
 
     /**
-     * Create a new command instance.
+     * Parse the name and format according to the root namespace.
      *
+     * @param  string $name
+     *
+     * @return string
      */
-    public function __construct()
+    protected function parseName($name)
     {
-        parent::__construct();
+        return 'Eloquent' . ucwords(camel_case($name)) . 'Repository';
     }
+
 
     /**
-     * Execute the console command.
+     * Get the stub file for the generator.
      *
-     * @return mixed
+     * @return string
      */
-    public function fire()
+    protected function getStub()
     {
-
+        return __DIR__ . '/../stubs/repository-implementation.stub';
     }
+
+
+    /**
+     * Get the destination class path.
+     *
+     * @param  string $name
+     *
+     * @return string
+     */
+    protected function getPath($name)
+    {
+        return config('kifegen.implementation_path') . str_replace('\\', '/', $name) . '.php';
+    }
+
 
     /**
      * Get the console command arguments.
@@ -46,8 +72,11 @@ class RepositoryGenerateCommand extends Command {
      */
     protected function getArguments()
     {
-        return [];
+        return [
+            [ 'name', InputArgument::REQUIRED, 'The name of the implementation' ],
+        ];
     }
+
 
     /**
      * Get the console command options.
@@ -56,6 +85,6 @@ class RepositoryGenerateCommand extends Command {
      */
     protected function getOptions()
     {
-        return [];
+        return [ ];
     }
 }
