@@ -1,6 +1,5 @@
 <?php namespace Kifed\Generator\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class RepositoryGenerateCommand extends GeneratorCommand
@@ -25,21 +24,7 @@ class RepositoryGenerateCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'Repository';
-
-
-    /**
-     * Parse the name and format according to the root namespace.
-     *
-     * @param  string $name
-     *
-     * @return string
-     */
-    protected function parseName($name)
-    {
-        return 'Eloquent' . ucwords(camel_case($name)) . 'Repository';
-    }
-
+    protected $type = 'repository';
 
     /**
      * Get the stub file for the generator.
@@ -47,23 +32,9 @@ class RepositoryGenerateCommand extends GeneratorCommand
      * @return string
      */
     protected function getStub()
-    {
-        return __DIR__ . '/../stubs/repository-implementation.stub';
-    }
-
-
-    /**
-     * Get the destination class path.
-     *
-     * @param  string $name
-     *
-     * @return string
-     */
-    protected function getPath($name)
-    {
-        return config('kifegen.implementation_path') . str_replace('\\', '/', $name) . '.php';
-    }
-
+	{
+		return __DIR__ . '/../stubs/repository-implementation.stub';
+	}
 
     /**
      * Get the console command arguments.
@@ -75,16 +46,5 @@ class RepositoryGenerateCommand extends GeneratorCommand
         return [
             [ 'name', InputArgument::REQUIRED, 'The name of the implementation' ],
         ];
-    }
-
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [ ];
     }
 }
